@@ -69,9 +69,9 @@ zone "{{ key }}" {
   {%- endif %}
   {% if (args['type'] == "master") and args['notify'] -%}
   notify yes;
-  {%- else %}
+  {% else -%}
   notify no;
-  {%- endif %}
+  {% endif -%}
   {% if masters is iterable -%}
   {% if masters is string -%}
   masters { {{ masters }}; };
@@ -81,7 +81,7 @@ zone "{{ key }}" {
     {{ item }};
     {%- endfor %}
   };
-  {%- endif %}
+  {% endif -%}
   {%- endif %}
   {%- endif %}
 };
