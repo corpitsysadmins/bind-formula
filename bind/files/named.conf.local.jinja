@@ -91,20 +91,20 @@ zone "{{ key }}" {
 include "{{ map.default_zones_config }}";
 {%- endif %}
 
-{% for key, args in salt['pillar.get']('bind:configured_zones', {})|dictsort -%}
-{%- if salt['pillar.get']("bind:configured_zones:" + key + ":file") -%}
+{%- for key, args in salt['pillar.get']('bind:configured_zones', {})|dictsort %}
+{%- if salt['pillar.get']("bind:configured_zones:" + key + ":file") %}
 {%- set file = salt['pillar.get']("bind:configured_zones:" + key + ":file") %}
-{% else %}
+{%- else %}
 {%- set file = salt['pillar.get']("bind:available_zones:" + key + ":file") %}
-{%- endif -%}
+{%- endif %}
 
-{%- if salt['pillar.get']("bind:configured_zones:" + key + ":masters") -%}
+{%- if salt['pillar.get']("bind:configured_zones:" + key + ":masters") %}
 {%- set masters = salt['pillar.get']("bind:configured_zones:" + key + ":masters") %}
-{% else %}
+{%- else %}
 {%- set masters = salt['pillar.get']("bind:available_zones:" + key + ":masters") %}
-{%- endif -%}
+{%- endif %}
 {{ zone(key, args, file, masters) }}
-{% endfor %}
+{%- endfor %}
 
 {%- for view, view_data in salt['pillar.get']('bind:configured_views', {})|dictsort %}
 
