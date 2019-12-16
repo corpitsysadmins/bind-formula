@@ -67,21 +67,21 @@ zone "{{ key }}" {
   {%- if args['zone-statistics'] is defined %}
   zone-statistics yes;
   {%- endif %}
-  {% if (args['type'] == "master") and args['notify'] -%}
+  {%- if (args['type'] == "master") and args['notify'] %}
   notify yes;
-  {% else -%}
+  {%- else %}
   notify no;
-  {% endif -%}
-  {% if masters is iterable -%}
-  {% if masters is string -%}
+  {%- endif %}
+  {%- if masters is iterable %}
+  {%- if masters is string %}
   masters { {{ masters }}; };
-  {% else -%}
+  {%- else %}
   masters {
     {%- for item in masters %}
     {{ item }};
     {%- endfor %}
   };
-  {% endif -%}
+  {%- endif %}
   {%- endif %}
   {%- endif %}
 };
