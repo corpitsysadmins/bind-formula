@@ -26,22 +26,22 @@ masters {{ name }} {
 {%- macro zone(key, args, file, masters) %}
 zone "{{ key }}" {
   type {{ args['type'] }};
-  {% if args['type'] == 'forward' -%}
-    {% if args['forward'] is defined -%}
+  {%- if args['type'] == 'forward' %}
+    {%- if args['forward'] is defined %}
        forward {{ args['forward'] }};
     {%- endif %}
   forwarders {
-    {% for forwarder in args.forwarders -%}
+    {%- for forwarder in args.forwarders %}
       {{ forwarder }};
     {%- endfor %}
   };
-  {% else -%}
-  {% if args['dnssec'] is defined and args['dnssec'] -%}
+  {%- else %}
+  {%- if args['dnssec'] is defined and args['dnssec'] %}
   file "{{ zones_directory }}/{{ file }}.signed";
-  {% else -%}
+  {%- else %}
   file "{{ zones_directory }}/{{ file }}";
   {%- endif %}
-  {% if args['auto-dnssec'] is defined -%}
+  {%- if args['auto-dnssec'] is defined %}
   auto-dnssec {{ args['auto-dnssec'] }};
   inline-signing yes;
   {%- endif %}
