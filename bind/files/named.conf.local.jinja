@@ -82,7 +82,7 @@ zone "{{ key }}" {
     {%- endfor %}
   };
   {%- else %}
-    masters { {{ masters }} };
+    masters { {{ masters }}; };
   {%- endif %}
   {%- endif %}
   {%- endif %}
