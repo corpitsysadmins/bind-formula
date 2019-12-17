@@ -27,12 +27,12 @@ masters {{ name }} {
 zone "{{ key }}" {
   type {{ args['type'] }};
   {%- if args['type'] == 'forward' %}
-    {%- if args['forward'] is defined %}
-       forward {{ args['forward'] }};
-    {%- endif %}
+  {%- if args['forward'] is defined %}
+  forward {{ args['forward'] }};
+  {%- endif %}
   forwarders {
     {%- for forwarder in args.forwarders %}
-      {{ forwarder }};
+    {{ forwarder }};
     {%- endfor %}
   };
   {%- else %}
