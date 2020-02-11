@@ -7,6 +7,13 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
+{% for key_id, key_data in salt['pillar.get']('bind:configured_keys', {})|dictsort %}
+key {{ key_id }} {
+  algorithm {{ key_data['algorithm'] }};
+  secret "{{ key_data['secret'] }}";
+};
+{%- endfor %}
+
 {% for name, data in salt['pillar.get']('bind:configured_acls', {})|dictsort %}
 acl {{ name }} {
   {%- for d in data %}
