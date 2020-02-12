@@ -110,8 +110,10 @@ include "{{ map.default_zones_config }}";
 
 {%- if salt['pillar.get']("bind:configured_zones:" + key + ":masters") %}
 {%- set masters = salt['pillar.get']("bind:configured_zones:" + key + ":masters") %}
-{%- else %}
+{%- elif salt['pillar.get']("bind:available_zones:" + key + ":masters") %}
 {%- set masters = salt['pillar.get']("bind:available_zones:" + key + ":masters") %}
+{%- else %}
+{%- set masters = None %}
 {%- endif %}
 {{ zone(key, args, file, masters) }}
 {%- endfor %}
