@@ -54,9 +54,9 @@ zone "{{ key }}" {
   {%- endif %}
   {%- if args['allow-update'] is defined %}
   {%- if args['allow-update'] is string %}
-  {% set allow_update = args['allow-update'] %}
+  {%- set allow_update = args['allow-update'] %}
   {%- else %}
-  {% set allow_update = args['allow-update']|join('; ') %}
+  {%- set allow_update = args['allow-update']|join('; ') %}
   {%- endif %}
   allow-update { {{ allow_update }}; };
   {%- endif %}
