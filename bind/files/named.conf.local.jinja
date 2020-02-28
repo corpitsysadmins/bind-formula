@@ -79,7 +79,7 @@ zone "{{ key }}" {
   {%- if args['zone-statistics'] is defined %}
   zone-statistics yes;
   {%- endif %}
-  {%- if (args['type'] == "master") and ('notify' in args) %}
+  {%- if 'notify' in args %}
   notify {{ 'yes' if args['notify'] else 'no' }};
   {%- endif %}
   {%- if masters is iterable %}
